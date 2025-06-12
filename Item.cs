@@ -30,8 +30,8 @@ namespace VideoGame.Inventory{
 
 
         public Item(string name, int? price = 0) {
-            this.Name = name;
-            this.Price = price;
+            Name = name;
+            Price = price;
         }
 
         /// <summary>

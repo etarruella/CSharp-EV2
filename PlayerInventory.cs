@@ -22,8 +22,8 @@ namespace VideoGame.Inventory {
         /// <param name="player">Dueño del inventario</param>
         /// <param name="size">Capacidad máxima del inventario</param>
         public PlayerInventory(Player player, int size = 10) {
-            this.parent = player;
-            this.Size = size;
+            parent = player;
+            Size = size;
         }
 
         /// <summary>
