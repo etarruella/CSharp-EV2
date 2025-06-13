@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 
 namespace VideoGame.Inventory {
 
@@ -13,8 +15,10 @@ namespace VideoGame.Inventory {
         /// </summary>
         public int Size { get; }
 
-        // TODO: Implementar cómo se almacenan los items 
-
+        /// <summary>
+        /// Array interno de ítems
+        /// </summary>
+        private readonly IItem?[] items;
 
         /// <summary>
         /// Crea el inventario asociado a un jugador
@@ -24,89 +28,133 @@ namespace VideoGame.Inventory {
         public PlayerInventory(Player player, int size = 10) {
             parent = player;
             Size = size;
+            items = new IItem?[size];
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Almacena un ítem en la primera posición libre
         /// </summary>
         public bool Store(IItem item) {
-
+            for (int i = 0; i < items.Length; i++) {
+                if (items[i] == null) {
+                    items[i] = item;
+                    if (item is Item concreteItem) {
+                        concreteItem.MoveTo(this);
+                    }
+                    return true;
+                }
+            }
             return false;
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Almacena un ítem en una posición específica si está vacía
         /// </summary>
         public bool StoreAt(IItem item, int index) {
-
-            return false;
+            if (index < 0 || index >= Size || items[index] != null) return false;
+            items[index] = item;
+            if (item is Item concreteItem) {
+                concreteItem.MoveTo(this);
+            }
+            return true;
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Obtiene el ítem en una posición o null si no hay
         /// </summary>
         public IItem? GetItemAt(int index) {
-            return null;
+            if (index < 0 || index >= Size) return null;
+            return items[index];
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Elimina un ítem del inventario si se encuentra
         /// </summary>
         public bool Drop(IItem item) {
-
+            for (int i = 0; i < items.Length; i++) {
+                if (items[i] == item) {
+                    items[i] = null;
+                    if (item is Item concreteItem) {
+                        concreteItem.MoveTo(null!);
+                    }
+                    return true;
+                }
+            }
             return false;
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Elimina un ítem de una posición específica
         /// </summary>
         public bool Drop(int index) {
-
-            return false;
+            if (index < 0 || index >= Size || items[index] == null) return false;
+            if (items[index] is Item concreteItem) {
+                concreteItem.MoveTo(null!);
+            }
+            items[index] = null;
+            return true;
         }
-        
 
         /// <summary>
-        /// TODO: Implementar
+        /// Devuelve una colección con todos los ítems actuales
         /// </summary>
         public ICollection<IItem> ListItems() {
-            return new List<IItem>();
+            List<IItem> currentItems = new List<IItem>();
+            foreach (var item in items) {
+                if (item != null) currentItems.Add(item);
+            }
+            return currentItems;
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Indica si un ítem está en el inventario
         /// </summary>
         public bool Contains(IItem item) {
+            foreach (var i in items) {
+                if (i == item) return true;
+            }
             return false;
         }
 
-
         /// <summary>
-        /// TODO: Implementar
+        /// Busca un ítem que cumpla una condición
         /// </summary>
         public IItem? Find(Func<IItem, bool> condition) {
+            foreach (var item in items) {
+                if (item != null && condition(item)) return item;
+            }
             return null;
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Busca un ítem de tipo T que cumpla una condición
         /// </summary>
-        public T? Find<T>(Func<T, bool> condition) where T:class,IItem {
+        public T? Find<T>(Func<T, bool> condition) where T : class, IItem {
+            foreach (var item in items) {
+                if (item is T typedItem && condition(typedItem)) return typedItem;
+            }
             return null;
         }
 
         /// <summary>
-        /// TODO: Implementar
+        /// Vacía completamente el inventario
         /// </summary>
         public void Clear() {
-
+            for (int i = 0; i < items.Length; i++) {
+                if (items[i] is Item concreteItem) {
+                    concreteItem.MoveTo(null!);
+                }
+                items[i] = null;
+            }
         }
-        
+
         /// <summary>
-        /// TODO: Implementar
+        /// Transfiere un ítem a otro inventario
         /// </summary>
-        public bool Transfer(IItem item, PlayerInventory target){
-            return false;
+        public bool Transfer(IItem item, PlayerInventory target) {
+            if (!Contains(item)) return false;
+            if (!target.Store(item)) return false;
+            return Drop(item);
         }
     }
 }
