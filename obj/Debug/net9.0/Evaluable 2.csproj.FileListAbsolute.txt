@@ -1,0 +1,15 @@
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.AssemblyInfoInputs.cache
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.AssemblyInfo.cs
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.csproj.CoreCompileInputs.cache
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.sourcelink.json
+c:\Users\campusc02\Desktop\CSharp-EV2\bin\Debug\net9.0\Evaluable 2.exe
+C:\Users\campusc02\Desktop\CSharp-EV2\bin\Debug\net9.0\Evaluable 2.deps.json
+C:\Users\campusc02\Desktop\CSharp-EV2\bin\Debug\net9.0\Evaluable 2.runtimeconfig.json
+c:\Users\campusc02\Desktop\CSharp-EV2\bin\Debug\net9.0\Evaluable 2.dll
+c:\Users\campusc02\Desktop\CSharp-EV2\bin\Debug\net9.0\Evaluable 2.pdb
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.dll
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\refint\Evaluable 2.dll
+c:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.pdb
+C:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\Evaluable 2.genruntimeconfig.cache
+C:\Users\campusc02\Desktop\CSharp-EV2\obj\Debug\net9.0\ref\Evaluable 2.dll
