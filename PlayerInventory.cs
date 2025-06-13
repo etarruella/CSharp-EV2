@@ -59,20 +59,37 @@ namespace VideoGame.Inventory
 
         public bool StoreAt(IItem item, int index)
         {
-            if (index < 0 || index >= Size || items[index] != null) return false;
+            if (index < 0 || index >= Size)
+                return false;
+
+            if (items[index] == item)
+            {
+                // Ya está en esa posición exacta
+                return true;
+            }
 
             if (Contains(item))
             {
-                return true; // Ya está en el inventario, no lo insertamos otra vez
+                // Ya está en otra posición del inventario
+                return false;
             }
 
+            if (items[index] != null)
+            {
+                // La posición deseada está ocupada
+                return false;
+            }
+
+            // Todo OK: insertar en la posición deseada
             items[index] = item;
             if (item is Item concreteItem)
             {
                 concreteItem.MoveTo(this);
             }
+
             return true;
         }
+
 
 
         /// <summary>
